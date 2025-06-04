@@ -1,0 +1,26 @@
+[project]
+name = "gbc-hackathon-2025"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "adlfs>=2024.12.0",
+    "dask-cloudprovider[all]>=2024.9.1",
+    "dask-image>=2024.5.3",
+    "dask-jobqueue>=0.9.0",
+    "dask-kubernetes>=2025.4.3",
+    "dask[complete]>=2025.4.1",
+    "h5py>=3.13.0",
+    "ipykernel>=6.29.5",
+    "ipywidgets>=8.1.7",
+    "matplotlib>=3.10.1",
+    "numpy>=2.2.5",
+    "pandas>=2.2.3",
+    "scikit-image>=0.25.2",
+    "seaborn>=0.13.2",
+    "zarr>=3.0.7",
+]
+
+[tool.marimo.experimental]
+lsp = true
