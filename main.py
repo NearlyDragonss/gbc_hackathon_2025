@@ -43,26 +43,34 @@ def main(argv):
     start = time.time()
     with h5py.File(output_path, "w") as h5f:
         print("In file")
-        print(zarr_group)
-        print(list(zarr_group.group_keys()))
         # check if there are group keys
-        for group_name in zarr_group.group_keys():
-            print("In first for loop")
-            subgroup = zarr_group[group_name]
-            h5_subgroup = h5f.create_group(group_name)
-            for array_name in subgroup.array_keys():
-                print("In second for loop")
-                z = subgroup[array_name]
-                print(f"Converting {group_name}/{array_name}")
-                dask_arr = da.from_zarr(z)
-                h5_subgroup.create_dataset(
-                    array_name,
-                    data=dask_arr,
-                    shape=dask_arr.shape,
-                    dtype=dask_arr.dtype,
-                    chunks=True,
-                    compression="gzip",
-                )
+        zarr_group_keys = zarr_group.group_keys()
+        if list(zarr_group_keys):
+            for group_name in zarr_group_keys:
+                print("In first for loop")
+                subgroup = zarr_group[group_name]
+                h5_subgroup = h5f.create_group(group_name)
+
+                # check if there are array keys
+                array_keys = subgroup.array_keys()
+                if list(array_keys):
+                    for array_name in subgroup.array_keys():
+                        print("In second for loop")
+                        z = subgroup[array_name]
+                        print(f"Converting {group_name}/{array_name}")
+                        dask_arr = da.from_zarr(z)
+                        h5_subgroup.create_dataset(
+                            array_name,
+                            data=dask_arr,
+                            shape=dask_arr.shape,
+                            dtype=dask_arr.dtype,
+                            chunks=True,
+                            compression="gzip",
+                        )
+                else:
+                    print("Array keys are empty")
+        else:
+            print("Group keys are empty")
 
     end = time.time()
     print(f"Time taken to write data: {end - start} seconds")
