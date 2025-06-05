@@ -75,6 +75,26 @@ def main(argv):
                     print("Array keys are empty")
         else:
             print("Group keys are empty")
+            # check if there are array keys
+            array_keys = subgroup.array_keys()
+            print(list(array_keys))
+            if len(list(array_keys)) == 0:
+                print("True 2")
+                for array_name in subgroup.array_keys():
+                    print("In second for loop")
+                    z = subgroup[array_name]
+                    print(f"Converting {group_name}/{array_name}")
+                    dask_arr = da.from_zarr(z)
+                    h5_subgroup.create_dataset(
+                        array_name,
+                        data=dask_arr,
+                        shape=dask_arr.shape,
+                        dtype=dask_arr.dtype,
+                        chunks=True,
+                        compression="gzip",
+                    )
+            else:
+                print("group and array keys are empty")
 
     end = time.time()
     print(f"Time taken to write data: {end - start} seconds")
