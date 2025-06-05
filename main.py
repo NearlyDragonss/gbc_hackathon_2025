@@ -38,10 +38,10 @@ def main(argv):
     print('Output file is ', output_path)
 
     # check if output file exists and create if not
-    if not os.path.isfile(output_path):
-        f = open(output_path, "w")
-    else:
-        f = open(output_path, "w")
+    # if not os.path.isfile(output_path):
+    #     f = open(output_path, "w")
+    # else:
+    #     f = open(output_path, "w")
 
     zarr_group = zarr.open(input_path, mode="r")
     cluster = LocalCluster(n_workers=n_workers, threads_per_worker=threads_per_worker, memory_limit=memory_limit)
