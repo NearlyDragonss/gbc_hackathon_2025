@@ -45,9 +45,10 @@ def main(argv):
         print("In file")
         # check if there are group keys
         zarr_group_keys = zarr_group.group_keys()
-        print(list(zarr_group_keys))
-        print(len(list(zarr_group_keys)))
-        if len(list(zarr_group_keys)) != 0:
+        list_group_keys = list(zarr_group_keys)
+        print(list_group_keys)
+        print(len(list_group_keys))
+        if len(list_group_keys) != 0:
             print("True 1")
             for group_name in zarr_group.group_keys():
                 print("In first for loop")
@@ -55,10 +56,11 @@ def main(argv):
                 h5_subgroup = h5f.create_group(group_name)
 
                 # check if there are array keys
-                array_keys = subgroup.array_keys()
-                print(list(array_keys))
-                print(len(list(array_keys)))
-                if len(list(array_keys)) != 0:
+                array_keys = zarr_group.array_keys()
+                list_array_keys = list(array_keys)
+                print(list_array_keys)
+                print(len(list_array_keys))
+                if len(list_array_keys) != 0:
                     print("True 2")
                     for array_name in subgroup.array_keys():
                         print("In second for loop")
@@ -79,9 +81,10 @@ def main(argv):
             print("Group keys are empty")
             # check if there are array keys
             array_keys = zarr_group.array_keys()
-            print(list(array_keys))
-            print(len(list(array_keys)))
-            if len(list(array_keys)) != 0:
+            list_array_keys = list(array_keys)
+            print(list_array_keys)
+            print(len(list_array_keys))
+            if len(list_array_keys) != 0:
                 print("True 2")
                 for array_name in zarr_group.array_keys():
                     print("In second for loop")
