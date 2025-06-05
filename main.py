@@ -1,7 +1,8 @@
 # To be completed
+import os
+
 import dask.array as da
 import h5py
-import numpy as np
 from dask.distributed import Client, LocalCluster
 import zarr
 import time
@@ -36,13 +37,19 @@ def main(argv):
     print('Input file is ', input_path)
     print('Output file is ', output_path)
 
+    # check if output file exists and create if not
+    if not os.path.isfile(output_path):
+        f = open(output_path, "x")
+    else:
+        f = open(output_path, "w")
+
     zarr_group = zarr.open(input_path, mode="r")
     cluster = LocalCluster(n_workers=n_workers, threads_per_worker=threads_per_worker, memory_limit=memory_limit)
     client = Client(cluster)
     cluster.get_client()
 
     start = time.time()
-    with h5py.File(output_path, "w") as h5f:
+    with h5py.File(f) as h5f:
         for group_name in zarr_group.group_keys():
             subgroup = zarr_group[group_name]
             h5_subgroup = h5f.create_group(group_name)
