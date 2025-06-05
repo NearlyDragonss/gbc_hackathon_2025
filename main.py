@@ -78,14 +78,14 @@ def main(argv):
         else:
             print("Group keys are empty")
             # check if there are array keys
-            array_keys = subgroup.array_keys()
+            array_keys = zarr_group.array_keys()
             print(list(array_keys))
             print(len(list(array_keys)))
             if len(list(array_keys)) != 0:
                 print("True 2")
-                for array_name in subgroup.array_keys():
+                for array_name in zarr_group.array_keys():
                     print("In second for loop")
-                    z = subgroup[array_name]
+                    z = zarr_group[array_name]
                     print(f"Converting {group_name}/{array_name}")
                     dask_arr = da.from_zarr(z)
                     h5_subgroup.create_dataset(
