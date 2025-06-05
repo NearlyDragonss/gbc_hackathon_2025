@@ -48,7 +48,7 @@ def main(argv):
         print(list(zarr_group_keys))
         if len(list(zarr_group_keys)) == 0:
             print("True 1")
-            for group_name in zarr_group_keys:
+            for group_name in zarr_group.group_keys():
                 print("In first for loop")
                 subgroup = zarr_group[group_name]
                 h5_subgroup = h5f.create_group(group_name)
