@@ -91,7 +91,7 @@ def main(argv):
                     z = zarr_group[array_name]
                     print(f"Converting {array_name}")
                     dask_arr = da.from_zarr(z)
-                    h5_subgroup.create_dataset(
+                    h5f.create_dataset(
                         array_name,
                         data=dask_arr,
                         shape=dask_arr.shape,
