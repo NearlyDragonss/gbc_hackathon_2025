@@ -39,7 +39,7 @@ def main(argv):
 
     # check if output file exists and create if not
     if not os.path.isfile(output_path):
-        f = open(output_path, "x")
+        f = open(output_path, "w")
     else:
         f = open(output_path, "w")
 
