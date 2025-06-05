@@ -11,7 +11,7 @@ def main(argv):
     inputfile = ''
     outputfile = ''
     try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["i_file=", "o_file=", "n_work=", "threads=", "mem_lim="])
+        opts, args = getopt.getopt(argv, "hi:m:", ["i_file=", "o_file=", "n_work=", "threads=", "mem_lim="])
         n_workers = 2
         threads_per_worker = 2
         memory_limit = "8GB"
@@ -45,6 +45,7 @@ def main(argv):
         print("In file")
         print(zarr_group)
         print(list(zarr_group.group_keys()))
+        # check if there are group keys
         for group_name in zarr_group.group_keys():
             print("In first for loop")
             subgroup = zarr_group[group_name]
