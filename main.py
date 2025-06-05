@@ -42,6 +42,7 @@ def main(argv):
 
     start = time.time()
     with h5py.File(output_path, "w") as h5f:
+        print("In file")
         for group_name in zarr_group.group_keys():
             print("In first for loop")
             subgroup = zarr_group[group_name]
