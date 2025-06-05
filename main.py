@@ -46,7 +46,7 @@ def main(argv):
         # check if there are group keys
         zarr_group_keys = zarr_group.group_keys()
         print(list(zarr_group_keys))
-        if list(zarr_group_keys):
+        if len(list(zarr_group_keys)) == 0:
             for group_name in zarr_group_keys:
                 print("In first for loop")
                 subgroup = zarr_group[group_name]
@@ -55,7 +55,7 @@ def main(argv):
                 # check if there are array keys
                 array_keys = subgroup.array_keys()
                 print(list(array_keys))
-                if list(array_keys):
+                if len(list(array_keys)) == 0:
                     for array_name in subgroup.array_keys():
                         print("In second for loop")
                         z = subgroup[array_name]
