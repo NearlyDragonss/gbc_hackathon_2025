@@ -27,9 +27,9 @@ def main(argv):
         elif opt in ("-o", "--o_file"):
             output_path = arg
         elif opt in("-n", "--n_work"):
-            n_workers = arg
+            n_workers = int(arg)
         elif opt in("-t", "--threads"):
-            threads_per_worker = arg
+            threads_per_worker = int(arg)
         elif opt in("-m", "--mem_lim"):
             memory_limit = arg
     print('Input file is ', input_path)
