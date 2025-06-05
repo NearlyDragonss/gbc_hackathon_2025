@@ -89,7 +89,7 @@ def main(argv):
                 for array_name in zarr_group.array_keys():
                     print("In second for loop")
                     z = zarr_group[array_name]
-                    print(f"Converting {group_name}/{array_name}")
+                    print(f"Converting {array_name}")
                     dask_arr = da.from_zarr(z)
                     h5_subgroup.create_dataset(
                         array_name,
