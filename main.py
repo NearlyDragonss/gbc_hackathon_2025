@@ -11,7 +11,7 @@ def main(argv):
     inputfile = ''
     outputfile = ''
     try:
-        opts, args = getopt.getopt(argv, "hi:m:", ["i_file=", "o_file=", "n_work=", "threads=", "mem_lim="])
+        opts, args = getopt.getopt(argv, "i:o:n::t::m::", ["i_file=", "o_file=", "n_work=", "threads=", "mem_lim="])
         n_workers = 2
         threads_per_worker = 2
         memory_limit = "8GB"
