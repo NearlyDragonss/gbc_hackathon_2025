@@ -49,7 +49,7 @@ def main(argv):
     cluster.get_client()
 
     start = time.time()
-    with h5py.File(f) as h5f:
+    with h5py.File(output_path, "w") as h5f:
         for group_name in zarr_group.group_keys():
             subgroup = zarr_group[group_name]
             h5_subgroup = h5f.create_group(group_name)
