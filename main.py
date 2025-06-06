@@ -43,6 +43,11 @@ def main(argv):
 
     start = time.time()
     with h5py.File(output_path, "w") as h5f:
+        # copy attributes
+        for key, value in zarr_group.attrs.items():
+            h5f.attrs[key] = value
+
+
         # check if there are group keys
         zarr_group_keys = zarr_group.group_keys()
         list_group_keys = list(zarr_group_keys)
@@ -50,6 +55,10 @@ def main(argv):
             for group_name in zarr_group.group_keys():
                 subgroup = zarr_group[group_name]
                 h5_subgroup = h5f.create_group(group_name)
+
+                # copy attributes
+                for key, value in subgroup.attrs.items():
+                    h5_subgroup.attrs[key] = value
 
                 # check if there are array keys
                 array_keys = subgroup.array_keys()
@@ -67,6 +76,11 @@ def main(argv):
                             chunks=True,
                             compression="gzip",
                         )
+
+                        # copy attributes
+                        for key, value in z.attrs.items():
+                            h5_subgroup.attrs[key] = value
+
                 else:
                     print("Array keys are empty")
 
@@ -88,6 +102,9 @@ def main(argv):
                         chunks=True,
                         compression="gzip",
                     )
+                    # copy attributes
+                    for key, value in z.attrs.items():
+                        h5_subgroup.attrs[key] = value
             else:
                 print("Group and array keys are empty")
 
