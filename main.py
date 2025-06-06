@@ -36,32 +36,26 @@ def main(argv):
     print('Output file is ', output_path)
 
     zarr_group = zarr.open(input_path, mode="r")
+    # cluster setup
     cluster = LocalCluster(n_workers=n_workers, threads_per_worker=threads_per_worker, memory_limit=memory_limit)
     client = Client(cluster)
     cluster.get_client()
 
     start = time.time()
     with h5py.File(output_path, "w") as h5f:
-        print("In file")
         # check if there are group keys
         zarr_group_keys = zarr_group.group_keys()
         list_group_keys = list(zarr_group_keys)
-        print(list_group_keys)
         if len(list_group_keys) != 0:
-            print("True 1")
             for group_name in zarr_group.group_keys():
-                print("In first for loop")
                 subgroup = zarr_group[group_name]
                 h5_subgroup = h5f.create_group(group_name)
 
                 # check if there are array keys
                 array_keys = subgroup.array_keys()
                 list_array_keys = list(array_keys)
-                print(list_array_keys)
                 if len(list_array_keys) != 0:
-                    print("True 2")
                     for array_name in subgroup.array_keys():
-                        print("In second for loop")
                         z = subgroup[array_name]
                         print(f"Converting {group_name}/{array_name}")
                         dask_arr = da.from_zarr(z)
@@ -75,21 +69,14 @@ def main(argv):
                         )
                 else:
                     print("Array keys are empty")
-                    # Split by chunks
 
         else:
             print("Group keys are empty")
             # check if there are array keys
             array_keys = zarr_group.array_keys()
             list_array_keys = list(array_keys)
-            print(list_array_keys)
-            print(len(list_array_keys))
-            print("zarr group")
-            print(zarr_group.shape)
             if len(list_array_keys) != 0:
-                print("True 2")
                 for array_name in zarr_group.array_keys():
-                    print("In second for loop")
                     z = zarr_group[array_name]
                     print(f"Converting {array_name}")
                     dask_arr = da.from_zarr(z)
@@ -102,7 +89,7 @@ def main(argv):
                         compression="gzip",
                     )
             else:
-                print("group and array keys are empty")
+                print("Group and array keys are empty")
 
     end = time.time()
     print(f"Time taken to write data: {end - start} seconds")
