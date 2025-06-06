@@ -52,7 +52,7 @@ def main(argv):
             print("True 1")
             for group_name in zarr_group.group_keys():
                 print("In first for loop")
-                subgroup = zarr_group.open_group(group_name, mode="r")
+                subgroup = zarr.open_group(group_name, mode="r")
                 h5_subgroup = h5f.create_group(group_name)
 
                 # check if there are array keys
