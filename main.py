@@ -77,6 +77,8 @@ def main(argv):
                         )
                 else:
                     print("Array keys are empty")
+                    # Split by chunks
+
         else:
             print("Group keys are empty")
             # check if there are array keys
@@ -84,6 +86,8 @@ def main(argv):
             list_array_keys = list(array_keys)
             print(list_array_keys)
             print(len(list_array_keys))
+            print("zarr group")
+            print(zarr_group.shape)
             if len(list_array_keys) != 0:
                 print("True 2")
                 for array_name in zarr_group.array_keys():
