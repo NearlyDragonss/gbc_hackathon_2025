@@ -60,6 +60,8 @@ def main(argv):
                 list_array_keys = list(array_keys)
                 print(list_array_keys)
                 print(len(list_array_keys))
+                print("zarr group")
+                print(zarr_group.shape)
                 if len(list_array_keys) != 0:
                     print("True 2")
                     for array_name in subgroup.array_keys():
