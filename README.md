@@ -36,7 +36,7 @@ pip install -e .
 
 ## Usage
 
-### Local Pipeline
+### Local Notebook Pipeline
 
 The repository includes a Jupyter notebook (local_pipeline.ipynb) that demonstrates converting Zarr data to HDF5 format:
 
@@ -78,6 +78,15 @@ with h5py.File(output_path, "w") as h5f:
             )
 ```
 
+### Local Script Pipeline
+
+The repository includes a python script (main.py) that converts Zarr data to HDF5 format:
+
+1. Place your Zarr data in fused.zarr 
+2. Give command line inputs in this format:
+  - `uv run <path/to/main.py> -i <path/to/input/data> -o <path/to/output/file> -n <number_of_workers> -t <number_of_threads_per_worker> -m <memory_limit_with_units>`
+  - `-n`, `-t`, `-m` are optional and a default of 2 workers, 2 threads per worker and 8GB of memory will be selected otherwise
+
 ## Project Structure
 
 ```
@@ -86,7 +95,7 @@ with h5py.File(output_path, "w") as h5f:
 ├── local_testing/            # Directory for test data and outputs
 │   ├── data/                 # Input Zarr data directory
 │   └── output/               # Output HDF5 files directory
-├── main.py                   # Main script (to be completed)
+├── main.py                   # Main script which converst Zarr to HDF5
 ├── pyproject.toml            # Project dependencies and configuration
 ├── README.md                 # This documentation
 └── src/                      # Source code directory
