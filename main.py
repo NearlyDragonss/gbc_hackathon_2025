@@ -47,19 +47,17 @@ def main(argv):
         zarr_group_keys = zarr_group.group_keys()
         list_group_keys = list(zarr_group_keys)
         print(list_group_keys)
-        print(len(list_group_keys))
         if len(list_group_keys) != 0:
             print("True 1")
             for group_name in zarr_group.group_keys():
                 print("In first for loop")
-                subgroup = zarr.open_group(group_name, mode="r")
+                subgroup = zarr_group[group_name]
                 h5_subgroup = h5f.create_group(group_name)
 
                 # check if there are array keys
                 array_keys = subgroup.array_keys()
                 list_array_keys = list(array_keys)
                 print(list_array_keys)
-                print(len(list_array_keys))
                 if len(list_array_keys) != 0:
                     print("True 2")
                     for array_name in subgroup.array_keys():
