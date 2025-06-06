@@ -56,7 +56,7 @@ def main(argv):
                 h5_subgroup = h5f.create_group(group_name)
 
                 # check if there are array keys
-                array_keys = zarr_group_keys.array_keys()
+                array_keys = subgroup.array_keys()
                 list_array_keys = list(array_keys)
                 print(list_array_keys)
                 print(len(list_array_keys))
